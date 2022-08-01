@@ -1,0 +1,45 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Записная книжка</h1>
+    <input type="text" name="" id="">
+    <button>Добавить</button>
+    <button>Получить все заметки</button>
+</body>
+<script>
+    const addBtn = document.getElementsByTagName('button')[0];
+    const getBtn = document.getElementsByTagName('button')[1];
+    const input = document.getElementsByTagName('input')[0];
+
+    addBtn.addEventListener('click', () => {
+        fetch('http://0.0.0.0:3000', {
+            method: 'POST',
+            body: input.value,
+            
+        });
+    });
+
+    getBtn.addEventListener('click', () => {
+        fetch('http://0.0.0.0:3000', {
+            method: 'GET',
+            }).then((res) => {
+                res.json().then((data) => {
+                    for (let i = 0; i < data.length; i++) {
+                        const note = data[i];
+                        document.body.insertAdjacentHTML('beforeend', `
+                        <div>
+                            ${note}
+                        </div>
+                        `)
+                    }
+                });
+            })
+    });
+    
+</script>
+</html>
