@@ -4,6 +4,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <h1>Записная книжка</h1>
@@ -35,15 +36,23 @@
                         notes_cont.innerHTML = '';
                         const note = data[i];
                         notes_cont.insertAdjacentHTML('beforeend', `
-                        <div style='padding: 10px'>
+                        <div id="add" >
                             ${note}
-                            <span style='cursor: pointer; color: red' >X</span>
+                            <span id="del" class='del'>X</span>
                         </div>
                         `)
                     }
                 });
             })
     });
+    notes_cont.addEventListener('click', (event) => {
+        if (event.target.classList.contains('del')) {
+        event.target.parentElement.remove()
+    } else if (event.target.classList.contains('add') === false) {
+        return
+    }
+    })
+
     
 </script>
 </html>
