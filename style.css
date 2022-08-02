@@ -4,5 +4,11 @@
 }
 
 #add {
-    padding: 10px
+    padding: 0px;
+    padding-left: 5px;
+    display: flex;
+    width: 341px;
+    flex-direction: row;
+    justify-content: space-between;
+    padding-top: 10px;
 }
