@@ -8,10 +8,10 @@
 </head>
 <body>
     <h1>Записная книжка</h1>
-    <h6 style="color: red;">для работы требуется запустить nodejs, который есть в репозитории</h6>
     <input type="text" name="" id="">
     <button>Добавить</button>
-    <button>Получить все заметки</button>
+    <button id="deleteInp">Получить все заметки</button>
+    <button id="removeInp">Сбросить</button>
     <div id="notes_cont"></div>
 </body>
 <script>
@@ -19,6 +19,7 @@
     const getBtn = document.getElementsByTagName('button')[1];
     const input = document.getElementsByTagName('input')[0];
     const notes_cont = document.getElementById('notes_cont');
+    const remove = document.getElementsByTagName('button')[2];
 
     addBtn.addEventListener('click', () => {
         fetch('http://0.0.0.0:3000', {
@@ -34,7 +35,7 @@
             }).then((res) => {
                 res.json().then((data) => {
                     for (let i = 0; i < data.length; i++) {
-                        notes_cont.innerHTML = '';
+                        /* notes_cont.innerHTML = ''; */
                         const note = data[i];
                         notes_cont.insertAdjacentHTML('beforeend', `
                         <div id="add" >
@@ -44,16 +45,26 @@
                         `)
                     }
                 });
+                /* console.dir(notes_cont) */
             })
     });
-    notes_cont.addEventListener('click', (event) => {
+    notes_cont.addEventListener('click', () => {
         if (event.target.classList.contains('del')) {
         event.target.parentElement.remove()
     } else if (event.target.classList.contains('add') === false) {
         return
     }
-    })
+    }); 
 
+        
+    removeInp.addEventListener('click', () => {
+            if (notes_cont !== false) {
+                notes_cont.innerHTML = '';
+            } else {
+                return
+            }
+        });
+           
     
 </script>
 </html>
