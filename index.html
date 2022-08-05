@@ -58,11 +58,16 @@
 
         
     removeInp.addEventListener('click', () => {
+        fetch('http://0.0.0.0:3000', {
+            method: 'DELETE',
+        }).then((res) => {
             if (notes_cont !== false) {
                 notes_cont.innerHTML = '';
             } else {
                 return
             }
+        })
+            
         });
            
     
